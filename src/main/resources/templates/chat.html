@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Application</title>
+    <!-- Bootstrap CSS cho giao diện -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome cho các icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- SockJS và STOMP cho WebSocket -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <!-- CSS tùy chỉnh -->
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/chat.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar - Hiển thị danh sách chat và người dùng online -->
+            <div class="col-md-3">
+                <div class="sidebar p-3">
+                    <!-- Header của sidebar với nút tạo chat mới -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Chats</h4>
+                        <div>
+                            <!-- Nút tạo chat riêng tư mới -->
+                            <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#newChatModal">
+                                <i class="fas fa-comment"></i>
+                            </button>
+                            <!-- Nút tạo nhóm chat mới -->
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#newGroupModal">
+                                <i class="fas fa-users"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Danh sách các cuộc trò chuyện -->
+                    <div id="chat-list"></div>
+
+                    <!-- Danh sách người dùng đang online -->
+                    <div class="online-users">
+                        <h6 class="mb-3">Online Users</h6>
+                        <div id="online-users-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Khu vực chat chính -->
+            <div class="col-md-9">
+                <div class="main-content">
+                    <!-- Header của khu vực chat -->
+                    <div class="chat-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <!-- Avatar và tên của cuộc trò chuyện hiện tại -->
+                                <div class="user-avatar me-2" id="current-chat-avatar"></div>
+                                <h5 class="mb-0" id="current-chat-name">Select a chat</h5>
+                            </div>
+                            <div>
+                                <!-- Nút đăng xuất -->
+                                <button class="btn btn-danger btn-sm" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Khu vực hiển thị tin nhắn -->
+                    <div id="chat-messages" class="chat-container p-3"></div>
+
+                    <!-- Khu vực nhập tin nhắn -->
+                    <div class="chat-input-container">
+                        <form id="message-form" class="d-flex">
+                            <input type="text" id="message" class="form-control me-2" 
+                                   placeholder="Type your message..." disabled>
+                            <button type="submit" class="btn btn-primary" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal tạo chat riêng tư mới -->
+    <div class="modal fade" id="newChatModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Chat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Danh sách người dùng online có thể chat -->
+                    <div id="online-users-select"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal tạo nhóm chat mới -->
+    <div class="modal fade" id="newGroupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Group</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form tạo nhóm -->
+                    <div class="mb-3">
+                        <label for="group-name" class="form-label">Group Name</label>
+                        <input type="text" id="group-name" class="form-control" 
+                               placeholder="Enter group name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Select Members</label>
+                        <!-- Danh sách checkbox chọn thành viên nhóm -->
+                        <div id="group-members-select"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="createNewGroup()">Create Group</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS và khởi tạo biến username từ session -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:inline="javascript">
+        const username = [[${session.username}]];  // Lấy username từ session
+    </script>
+    <!-- File JavaScript xử lý logic chat -->
+    <script src="/js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+/* Đảm bảo body chiếm toàn bộ chiều cao màn hình */ 
+body { 
+    height: 100vh;
+}
+
+/* Khu vực hiển thị tin nhắn */
+.chat-container {
+    height: calc(100vh - 200px); /* Chiều cao động, trừ đi phần header và input */
+    overflow-y: auto;            /* Cho phép cuộn khi có nhiều tin nhắn */
+}
+
+/* Định dạng chung cho tin nhắn */
+.message {
+    border-radius: 15px;        /* Bo tròn góc tin nhắn */
+    margin: 5px;
+    padding: 10px 15px;
+    max-width: 70%;            /* Giới hạn chiều rộng tối đa */
+    position: relative;
+}
+
+/* Tin nhắn người dùng gửi đi */
+.sent {
+    background-color: #0084ff;  /* Màu xanh cho tin nhắn gửi đi */
+    color: white;
+    margin-left: auto;         /* Đặt tin nhắn bên phải */
+}
+
+/* Tin nhắn nhận được */
+.received {
+    background-color: #e4e6eb; /* Màu xám cho tin nhắn nhận */
+    margin-right: auto;        /* Đặt tin nhắn bên trái */
+}
+
+/* Thời gian gửi tin nhắn */
+.message-time {
+    font-size: 0.7em;
+    margin-top: 4px;
+    opacity: 0.7;             /* Làm mờ thời gian để không quá nổi bật */
+}
+
+/* Sidebar chứa danh sách chat và người dùng */
+.sidebar {
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+}
+
+/* Item trong danh sách chat */
+.chat-list-item {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Hiệu ứng hover cho item chat */
+.chat-list-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Trạng thái active của item chat */
+.chat-list-item.active {
+    background-color: #e9ecef;
+}
+
+/* Header của khu vực chat */
+.chat-header {
+    background: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Khu vực nhập tin nhắn */
+.chat-input-container {
+    background: white;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Container chính của khu vực chat */
+.main-content {
+    background: white;
+    border-radius: 10px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;    /* Sắp xếp các phần tử theo chiều dọc */
+}
+
+/* Avatar người dùng/nhóm */
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;        /* Tạo hình tròn cho avatar */
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Phần danh sách người dùng online */
+.online-users {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Item người dùng online */
+.online-user-item {
+    cursor: pointer;
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 4px;
+}
+
+/* Hiệu ứng hover cho item người dùng */
+.online-user-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Chấm tròn hiển thị trạng thái online */
+.online-badge {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: #2ecc71;  /* Màu xanh lá cho trạng thái online */
+}

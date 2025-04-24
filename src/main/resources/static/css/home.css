@@ -1,0 +1,15 @@
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1920x1080?chat');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.btn-hero {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    margin: 10px;
+}
