@@ -1,0 +1,15 @@
+com\springboot\websocket\service\GroupService.class
+com\springboot\websocket\entity\Group.class
+com\springboot\websocket\WebsocketApplication.class
+com\springboot\websocket\dto\ChatMessage.class
+com\springboot\websocket\controller\AuthController.class
+com\springboot\websocket\controller\ChatAPIController.class
+com\springboot\websocket\dto\ChatMessage$MessageType.class
+com\springboot\websocket\service\UserService.class
+com\springboot\websocket\entity\Message.class
+com\springboot\websocket\service\ChatService.class
+com\springboot\websocket\controller\ChatController.class
+com\springboot\websocket\entity\User.class
+com\springboot\websocket\config\WebSocketConfig.class
+com\springboot\websocket\controller\HomeController.class
+com\springboot\websocket\service\UserManager.class
