@@ -8,7 +8,7 @@ let onlineUsers = new Set();     // Danh sách người dùng đang online
  * Thiết lập kết nối WebSocket và đăng ký các kênh nhận tin nhắn
  */
 function connect() {
-   // const socket = new SockJS('/ws');
+    //const socket = new SockJS('/ws');
     const socket = new SockJS(window.location.origin + '/ws');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
@@ -293,7 +293,7 @@ function createNewGroup() {
         })
         .then(response => response.json())
         .then(group => {
-            addChatToList(group);
+            //addChatToList(group);
             selectChat(group);
             const modal = bootstrap.Modal.getInstance(document.getElementById('newGroupModal'));
             modal.hide();
