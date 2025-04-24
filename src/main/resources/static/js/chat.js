@@ -9,7 +9,7 @@ let onlineUsers = new Set();     // Danh sách người dùng đang online
  */
 function connect() {
    // const socket = new SockJS('/ws');
-    const socket = new SockJS('https://' + window.location.hostname + '/ws');
+    const socket = new SockJS('https://' + window.location.hostname + '/wss');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
