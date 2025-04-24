@@ -8,7 +8,12 @@ let onlineUsers = new Set();     // Danh sách người dùng đang online
  * Thiết lập kết nối WebSocket và đăng ký các kênh nhận tin nhắn
  */
 function connect() {
-    const socket = new SockJS('/ws');
+   // const socket = new SockJS('/ws');
+    const socketURL = window.location.protocol === 'https:' ?
+        `wss://${window.location.hostname}/ws` :
+        `ws://${window.location.hostname}:8080/ws`;
+
+    const socket = new SockJS(socketURL);
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected: ' + frame);
