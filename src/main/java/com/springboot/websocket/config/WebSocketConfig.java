@@ -14,7 +14,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     //Đăng ký endpoint WebSocket mà client sẽ sử dụng để kết nối
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/wss").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/ws")
+                .setAllowedOrigins("https://deploysocketchatrealtime-production.up.railway.app") // chỉ cho phép domain của bạn
+                .withSockJS();
     }
 
     /**
